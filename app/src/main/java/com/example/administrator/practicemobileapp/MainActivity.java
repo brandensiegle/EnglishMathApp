@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        changeText cText = new changeText();
+
+        //Pass TextView to change and the text to change to
+        cText.changeTo((TextView) findViewById(R.id.textView2), "NewText");
     }
 
     @Override
