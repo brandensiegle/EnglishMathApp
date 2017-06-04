@@ -48,7 +48,7 @@
 
     <EditText
         android:id="@+id/math_answer"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/math_secondvalue"
         android:layout_centerHorizontal="true"
