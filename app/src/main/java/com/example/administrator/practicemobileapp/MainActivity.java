@@ -1,6 +1,5 @@
 package com.example.administrator.practicemobileapp;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,59 +11,75 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    int rangeForProblems;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mainScreen();
+    }
+
+    private void mainScreen() {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.title_bar);
 
         setSupportActionBar(toolbar);
 
-        Button showButton = (Button) findViewById(R.id.button);
-        showButton.setText("Solve Problem");
-        showButton.setOnClickListener(new View.OnClickListener() {
+        SeekBar problemRange = (SeekBar) findViewById(R.id.problemRange);
+        rangeForProblems  = 20;
+
+        problemRange.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onClick(View v) {
-                solveAProblem();
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                TextView currentRange = (TextView) findViewById(R.id.currentRange);
+                rangeForProblems = progress;
+                String strRange = "" + progress;
+                currentRange.setText(strRange);
+
+                Button showButton = (Button) findViewById(R.id.button);
+                showButton.setText("Solve Problem");
+                showButton.setOnClickListener(new newProblemClickListener(rangeForProblems));
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
 
-
-
-    }
-
-    public void returnToMainScreen(){
-        setContentView(R.layout.activity_main);
         Button showButton = (Button) findViewById(R.id.button);
         showButton.setText("Solve Problem");
-        showButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                solveAProblem();
-            }
-        });
+        showButton.setOnClickListener(new newProblemClickListener(rangeForProblems));
     }
 
-    public void solveAProblem(){
+
+    public void solveAProblem(int range){
         setContentView(R.layout.solve_problem);
         Button returnButton = (Button) findViewById(R.id.returnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                returnToMainScreen();
+                mainScreen();
             }
         });
 
-        final String[] problem = MathProblemGenerator.getProblem();
+
+        final String[] problem = MathProblemGenerator.getProblem(range);
         TextView first = (TextView) findViewById(R.id.math_firstvalue);
         TextView second = (TextView) findViewById(R.id.math_secondvalue);
         TextView symbol = (TextView) findViewById(R.id.math_symbol);
-        TextView answer = (TextView) findViewById(R.id.math_answer);
 
         first.setText(problem[0]);
         second.setText(problem[1]);
@@ -77,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 EditText answerBox = (EditText) findViewById(R.id.math_answer);
                 if(answerBox.getText().toString().equalsIgnoreCase(problem[3])){
                     showAlert("Correct!");
-                    solveAProblem();
+                    solveAProblem(rangeForProblems);
                 } else {
                     showAlert(answerBox.getText().toString().toLowerCase());
                 }
@@ -100,12 +115,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        diag.setNegativeButton(R.string.popNo, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
+//        diag.setNegativeButton(R.string.popNo, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//            }
+//        });
         diag.show();
     }
 
@@ -132,4 +147,25 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    //******************
+    //
+    //    Listener fo onclick items that generate a new problem
+    //
+    //    TODO: Remove l8r
+    //******************
+    private class newProblemClickListener implements View.OnClickListener {
+        int range;
+
+        private newProblemClickListener(int range){
+            super();
+            this.range = range;
+        }
+
+        public void onClick(View v) {
+            solveAProblem(range);
+        }
+    }
 }
+
+

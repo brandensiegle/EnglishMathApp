@@ -19,7 +19,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/mainButton"
+        android:layout_marginBottom="103dp"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <SeekBar
+        android:id="@+id/problemRange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/currentRange"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:max="1000"
+        android:progress="20" />
+
+    <TextView
+        android:id="@+id/currentRange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="127dp" />
+        android:layout_marginBottom="15dp"
+        android:text="@string/default_range" />
 </RelativeLayout>

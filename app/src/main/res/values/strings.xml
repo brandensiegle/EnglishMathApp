@@ -1,15 +1,16 @@
 <resources>
-    <string name="title_bar">App Title</string>
-    <string name="mainButton">Show Popup</string>
+    <string name="title_bar">English Math</string>
+    <string name="mainButton">Solve a Problem</string>
 
-    <string name="app_name">Mobile App</string>
+    <string name="app_name">English Math</string>
 
     <string name="action_settings">Settings</string>
     <string name="close_app">Close App</string>
 
+    <string name="default_range">20</string>
 
     <string name="popTitle">Popup Title</string>
     <string name="popMessage">Popup Message</string>
-    <string name="popYes">Yes</string>
+    <string name="popYes">Next Problem</string>
     <string name="popNo">No</string>
 </resources>
