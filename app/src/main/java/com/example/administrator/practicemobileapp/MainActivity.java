@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,11 +17,13 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    TextToSpeak textToSpeak;
     int rangeForProblems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        textToSpeak = new TextToSpeak();
         mainScreen();
     }
 
@@ -76,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
+
         final String[] problem = MathProblemGenerator.getProblem(range);
         TextView first = (TextView) findViewById(R.id.math_firstvalue);
         TextView second = (TextView) findViewById(R.id.math_secondvalue);
@@ -85,25 +90,65 @@ public class MainActivity extends AppCompatActivity {
         second.setText(problem[1]);
         symbol.setText(problem[2]);
 
+
+        //set listeners for the text to speak on click
+        TextView firstVal = (TextView) findViewById(R.id.math_firstvalue);
+        TextView secondVal = (TextView) findViewById(R.id.math_secondvalue);
+
+        firstVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView tV = (TextView) v;
+                textToSpeak.execute(tV.getText().toString());
+            }
+        });
+
+        secondVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView tV = (TextView) v;
+                //textToSpeak.sayThis(tV.getText().toString());
+            }
+        });
+
+
+        //set listener for when te enter key is pressed
+        EditText answerBox = (EditText) findViewById(R.id.math_answer);
+        answerBox.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(keyCode == KeyEvent.KEYCODE_ENTER){
+                    EditText answerBox = (EditText) v;
+                    checkAnswer(answerBox.getText().toString(),problem[3]);
+                }
+                return false;
+            }
+        });
+
+        //set listener for when the check answer button is pressed
         FloatingActionButton answerCheckbutton = (FloatingActionButton) findViewById(R.id.checkAnswer);
         answerCheckbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText answerBox = (EditText) findViewById(R.id.math_answer);
-                if(answerBox.getText().toString().equalsIgnoreCase(problem[3])){
-                    showAlert("Correct!");
-                    solveAProblem(rangeForProblems);
-                } else {
-                    showAlert(answerBox.getText().toString().toLowerCase());
-                }
+                checkAnswer(answerBox.getText().toString(),problem[3]);
             }
         });
 
     }
 
+    private void checkAnswer(String a, String b) {
+        if(a.equalsIgnoreCase(b)){
+            showAlert("Correct!");
+            solveAProblem(rangeForProblems);
+        } else {
+            showAlert("Try again.");
+        }
+    }
+
     public void showAlert(String string){
         AlertDialog.Builder diag = new AlertDialog.Builder(this);
-        diag.setTitle(R.string.popTitle);
+        //diag.setTitle(R.string.popTitle);
         if (string==null) {
             diag.setMessage(R.string.popMessage);
         } else {

@@ -11,6 +11,6 @@
 
     <string name="popTitle">Popup Title</string>
     <string name="popMessage">Popup Message</string>
-    <string name="popYes">Next Problem</string>
+    <string name="popYes">Ok</string>
     <string name="popNo">No</string>
 </resources>
