@@ -37,15 +37,6 @@
         android:layout_toStartOf="@+id/math_secondvalue"
         android:layout_marginEnd="14dp" />
 
-    <Button
-        android:id="@+id/returnButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go Back"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="30dp" />
-
     <EditText
         android:id="@+id/math_answer"
         android:layout_width="match_parent"

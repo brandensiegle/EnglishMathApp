@@ -17,13 +17,11 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextToSpeak textToSpeak;
     int rangeForProblems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        textToSpeak = new TextToSpeak();
         mainScreen();
     }
 
@@ -70,14 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void solveAProblem(int range){
         setContentView(R.layout.solve_problem);
-        Button returnButton = (Button) findViewById(R.id.returnButton);
-        returnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mainScreen();
-            }
-        });
-
 
 
 
@@ -99,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView tV = (TextView) v;
+                TextToSpeak textToSpeak = new TextToSpeak();
                 textToSpeak.execute(tV.getText().toString());
             }
         });
@@ -107,7 +98,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView tV = (TextView) v;
-                //textToSpeak.sayThis(tV.getText().toString());
+                TextToSpeak textToSpeak = new TextToSpeak();
+                textToSpeak.execute(tV.getText().toString());
             }
         });
 
@@ -160,12 +152,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-//        diag.setNegativeButton(R.string.popNo, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//
-//            }
-//        });
         diag.show();
     }
 
@@ -174,6 +160,11 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public void onBackPressed(){
+        mainScreen();
     }
 
     @Override
