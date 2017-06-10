@@ -31,7 +31,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:max="1000"
-        android:progress="20" />
+        android:progress="20"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/currentRange"
@@ -40,5 +41,32 @@
         android:layout_above="@+id/button"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
-        android:text="@string/default_range" />
+        android:text="@string/default_range"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="113dp"
+        android:text="Button"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/button" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        android:layout_alignBaseline="@+id/button3"
+        android:layout_alignBottom="@+id/button3"
+        android:layout_toEndOf="@+id/button" />
 </RelativeLayout>
