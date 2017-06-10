@@ -1,4 +1,4 @@
-package com.example.administrator.practicemobileapp;
+package com.example.administrator.englishmathapp;
 
 import org.junit.Test;
 

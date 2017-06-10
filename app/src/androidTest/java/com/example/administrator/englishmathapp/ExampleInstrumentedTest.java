@@ -1,4 +1,4 @@
-package com.example.administrator.practicemobileapp;
+package com.example.administrator.englishmathapp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

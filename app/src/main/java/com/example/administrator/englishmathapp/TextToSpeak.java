@@ -1,22 +1,8 @@
-package com.example.administrator.practicemobileapp;
+package com.example.administrator.englishmathapp;
 
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
-
-import java.io.InputStream;
-import java.util.Calendar;
-import java.util.Date;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import javax.net.ssl.HttpsURLConnection;
-
-
-
 
 
 /**
