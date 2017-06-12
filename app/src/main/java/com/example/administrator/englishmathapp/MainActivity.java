@@ -30,35 +30,33 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.title_bar);
 
-        setSupportActionBar(toolbar);
+        //difficulty buttons
+        Button easyButton = (Button) findViewById(R.id.easyButton);
+        Button midButton = (Button) findViewById(R.id.midButton);
+        Button hardButton = (Button) findViewById(R.id.hardButton);
 
-        SeekBar problemRange = (SeekBar) findViewById(R.id.problemRange);
-        rangeForProblems  = 20;
-
-        problemRange.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        easyButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                TextView currentRange = (TextView) findViewById(R.id.currentRange);
-                rangeForProblems = progress;
-                String strRange = "" + progress;
-                currentRange.setText(strRange);
-
-                Button showButton = (Button) findViewById(R.id.button);
-                showButton.setText("Solve Problem");
-                showButton.setOnClickListener(new newProblemClickListener(rangeForProblems));
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
+            public void onClick(View v) {
+                solveAProblem( Integer.parseInt( ((Button) v).getText().toString()) );
             }
         });
+        midButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                solveAProblem( Integer.parseInt( ((Button) v).getText().toString()) );
+            }
+        });
+        hardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                solveAProblem( Integer.parseInt( ((Button) v).getText().toString()) );
+            }
+        });
+
+        setSupportActionBar(toolbar);
+
+
 
         Button showButton = (Button) findViewById(R.id.button);
         showButton.setText("Solve Problem");

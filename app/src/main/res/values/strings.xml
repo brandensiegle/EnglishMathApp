@@ -13,4 +13,8 @@
     <string name="popMessage">Popup Message</string>
     <string name="popYes">Ok</string>
     <string name="popNo">No</string>
+
+    <string name="difficultyEasy">90</string>
+    <string name="difficultyMid">900</string>
+    <string name="difficultyHard">9000</string>
 </resources>
