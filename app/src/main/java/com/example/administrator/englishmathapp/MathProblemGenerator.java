@@ -1,11 +1,13 @@
 package com.example.administrator.englishmathapp;
 
+import android.support.v7.app.AppCompatActivity;
+
 import java.util.Random;
 /**
  * Created by Administrator on 2017-06-04.
  */
 
-public class MathProblemGenerator {
+public class MathProblemGenerator extends AppCompatActivity {
 
     static String[] ones = new String[] { "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine" };
     static String[] teens = new String[] { "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
@@ -16,6 +18,16 @@ public class MathProblemGenerator {
 
     }
 
+    //-----------------------------
+    //Static method getProblem(int)
+    //@param: int val-> the maximum answer of the problem to be generated
+    //
+    //@return: String[]-> the components of a simple problem
+    //         [0]: first operand;
+    //         [1]: second operand;
+    //         [2]: the operation of the problem;
+    //         [3]: answer of the problem to be solved
+    //-----------------------------
     public static String[] getProblem(int val){
         int calculatedAnswer = val+1;
         int firstNumber = 0;
@@ -38,9 +50,15 @@ public class MathProblemGenerator {
         return problem;
     }
 
-
-    private static String FriendlyInteger(int n, String leftDigits, int thousands)
-    {
+    //-----------------------------
+    //Helper method FriendlyInteger(int, String, int)
+    //@param: int n-> number to be written out
+    //@param: String leftDigits-> string of the value on the left written out
+    //@param: int thousands-> the group of thousands to be written out
+    //
+    //@return: String: a written out string of the number given
+    //-----------------------------
+    private static String FriendlyInteger(int n, String leftDigits, int thousands) {
         if (n == 0)
         {
             return leftDigits;
@@ -81,8 +99,13 @@ public class MathProblemGenerator {
         return friendlyInt + thousandsGroups[thousands];
     }
 
-    private static String IntegerToWritten(int n)
-    {
+    //-----------------------------
+    //Helper method IntegerToWritten(int)
+    //@param: int n-> the number to be written out in English
+    //
+    //@return: String-> a written representation of the integer provided
+    //-----------------------------
+    private static String IntegerToWritten(int n) {
         if (n == 0)
         {
             return "Zero";

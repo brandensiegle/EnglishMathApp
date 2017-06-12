@@ -1,6 +1,7 @@
 package com.example.administrator.englishmathapp;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String RANGEMESSAGE= "com.example.administrator.englishmathapp.RANGE";
     int rangeForProblems;
 
     @Override
@@ -60,98 +62,20 @@ public class MainActivity extends AppCompatActivity {
 
         Button showButton = (Button) findViewById(R.id.button);
         showButton.setText("Solve Problem");
-        showButton.setOnClickListener(new newProblemClickListener(rangeForProblems));
+        showButton.setOnClickListener(new newProblemClickListener(90));
     }
 
 
     public void solveAProblem(int range){
-        setContentView(R.layout.solve_problem);
-
-
-
-        final String[] problem = MathProblemGenerator.getProblem(range);
-        TextView first = (TextView) findViewById(R.id.math_firstvalue);
-        TextView second = (TextView) findViewById(R.id.math_secondvalue);
-        TextView symbol = (TextView) findViewById(R.id.math_symbol);
-
-        first.setText(problem[0]);
-        second.setText(problem[1]);
-        symbol.setText(problem[2]);
-
-
-        //set listeners for the text to speak on click
-        TextView firstVal = (TextView) findViewById(R.id.math_firstvalue);
-        TextView secondVal = (TextView) findViewById(R.id.math_secondvalue);
-
-        firstVal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TextView tV = (TextView) v;
-                TextToSpeak textToSpeak = new TextToSpeak();
-                textToSpeak.execute(tV.getText().toString());
-            }
-        });
-
-        secondVal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TextView tV = (TextView) v;
-                TextToSpeak textToSpeak = new TextToSpeak();
-                textToSpeak.execute(tV.getText().toString());
-            }
-        });
-
-
-        //set listener for when te enter key is pressed
-        EditText answerBox = (EditText) findViewById(R.id.math_answer);
-        answerBox.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(keyCode == KeyEvent.KEYCODE_ENTER){
-                    EditText answerBox = (EditText) v;
-                    checkAnswer(answerBox.getText().toString(),problem[3]);
-                }
-                return false;
-            }
-        });
-
-        //set listener for when the check answer button is pressed
-        FloatingActionButton answerCheckbutton = (FloatingActionButton) findViewById(R.id.checkAnswer);
-        answerCheckbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText answerBox = (EditText) findViewById(R.id.math_answer);
-                checkAnswer(answerBox.getText().toString(),problem[3]);
-            }
-        });
+        Intent intendToSolveProblem = new Intent(this, MathProblemActivity.class);
+        intendToSolveProblem.putExtra(RANGEMESSAGE, range);
+        startActivity(intendToSolveProblem);
 
     }
 
-    private void checkAnswer(String a, String b) {
-        if(a.equalsIgnoreCase(b)){
-            showAlert("Correct!");
-            solveAProblem(rangeForProblems);
-        } else {
-            showAlert("Try again.");
-        }
-    }
 
-    public void showAlert(String string){
-        AlertDialog.Builder diag = new AlertDialog.Builder(this);
-        //diag.setTitle(R.string.popTitle);
-        if (string==null) {
-            diag.setMessage(R.string.popMessage);
-        } else {
-            diag.setMessage(string);
-        }
-        diag.setPositiveButton(R.string.popYes, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
 
-            }
-        });
-        diag.show();
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

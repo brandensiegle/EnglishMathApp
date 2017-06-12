@@ -17,4 +17,5 @@
     <string name="difficultyEasy">90</string>
     <string name="difficultyMid">900</string>
     <string name="difficultyHard">9000</string>
+    <string name="title_activity_math_problem">MathProblemActivity</string>
 </resources>
